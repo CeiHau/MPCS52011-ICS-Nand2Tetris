@@ -1,0 +1,127 @@
+class ShootGame {
+        field FrontSight frontsight;
+        field Target target;
+        field Bullet bullet;
+        
+        field boolean exist;
+        // field int horizon;
+        field int distance;
+
+        // field Target jack;
+        constructor ShootGame new() {
+            // let frontsight = FrontSight.new(256,128);
+            // let horizon = 10;
+            let target = Target.new(10, 128, 8);
+
+            return this;
+        }
+        /** Disposes this game. */
+    method void dispose() {
+        do frontsight.dispose();
+        do Memory.deAlloc(this);
+        return;
+    }
+
+    method void shoot() {
+        var int y;
+        let bullet = Bullet.new(256,240);
+        let y = 240;
+        while(y > 4) {
+            let y = bullet.move();
+            do Sys.wait(20);
+        }
+        do bullet.hide();
+        do bullet.dispose();
+        return;
+    }
+    method void moveBullet() {
+        var int height;
+        var boolean tag;
+        let height = bullet.move();
+        let distance = (((256 - target.get_x()) * (256 - target.get_x())) + ((128 - height) * (128 - height)) - ((8 + 3) * (8 + 3)));
+        if ((target.get_x() >230) &  (target.get_x() <270) ){
+                if(height< 120){
+                    let tag = true;
+                }
+        }
+        else{
+            let tag = false;
+        }
+        if (tag) {
+            do Output.printString("dis");
+            do Output.printInt(distance);
+            do Output.printString(" tx");
+            do Output.printInt(target.get_x());
+            do Output.printString(" bh");
+            do Output.printInt(height);
+            do Output.println();      // New line
+            do target.hide();
+            do target.dispose();
+            do bullet.hide();
+            do bullet.dispose();
+            
+            let target = Target.new(256, 128, 8);
+            let exist = false;
+        }
+        else {
+            if(height < 10){
+            do bullet.hide();
+            do bullet.dispose();
+            let exist = false;
+            }
+            
+        } 
+        
+        return;
+    }
+ 
+    method void moveTarget() {
+        do target.move();
+        if (target.get_x() > 500) {
+            do target.hide();
+            do target.dispose();
+       
+            let target = Target.new(10, 128, 8);
+        } 
+        return;
+    }
+
+    method void run() {
+        var char key;
+        var boolean exit;
+        let exit = false;
+        let exist = false;
+
+        while(~exit) {
+            
+            
+            
+            while ((key = 0) & (~exit)) {
+                let key = Keyboard.keyPressed();
+                do moveTarget();
+                
+                if (exist){
+                    do moveBullet();
+                }    
+                do Sys.wait(20);  
+            }
+            
+            if (key = 81) { let exit = true; }  // q key
+            if ((key = 32) & (~exist)) { 
+                let exist = true;
+                let bullet = Bullet.new(256, 240);
+                } 
+            while ((~(key = 0)) & (~exit)) {
+                let key = Keyboard.keyPressed();
+                do moveTarget();
+                
+                if (exist){
+                    do moveBullet();
+                }     
+                do Sys.wait(20); 
+            }                
+        }
+        return;
+    }
+   
+}

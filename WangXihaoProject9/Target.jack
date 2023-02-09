@@ -1,0 +1,62 @@
+class Target {
+    field int x, y, r;
+
+
+    constructor Target new(int Ax, int Ay, int Ar){
+        let x = Ax;
+        let y = Ay;
+        let r = Ar;
+        do show();
+        return this;
+    }
+
+    method void dispose(){
+        do Memory.deAlloc(this);
+        return;
+    }
+
+    method void show() {
+        do Screen.setColor(true);
+        do draw();
+	    return;
+    }
+
+    method void hide() {
+        do Screen.setColor(false);
+	    do draw();
+        return;
+    }
+
+  
+    method void draw() {
+        do Screen.drawCircle(x, y, r);
+        return;
+    }
+    
+    method int get_x() {
+        return x;
+    }
+
+    method in move() {
+        do hide();
+     
+        let x  = x + 3;
+        
+
+        do show();
+        return x;
+    }
+    
+    method void distance(int Bx, int By) {
+
+
+        var int i, j;
+        let i = 0;
+        let y = 0;
+
+        while((i < 5) & (j < 5)) {
+            
+        }
+        return;
+    }
+}

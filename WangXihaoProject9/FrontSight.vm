@@ -1,0 +1,75 @@
+function FrontSight.new 0
+push constant 2
+call Memory.alloc 1
+pop pointer 0
+push argument 0
+pop this 0
+push argument 1
+pop this 1
+push pointer 0
+push this 1
+push constant 512
+call Math.multiply 2
+push this 0
+add
+call FrontSight.draw 2
+pop temp 0
+push pointer 0
+return
+function FrontSight.dispose 0
+push argument 0
+pop pointer 0
+push pointer 0
+call Memory.deAlloc 1
+pop temp 0
+push constant 0
+return
+function FrontSight.draw 1
+push argument 0
+pop pointer 0
+push this 0
+push this 1
+call Screen.drawPixel 2
+pop temp 0
+push this 0
+push constant 3
+add
+push this 1
+push this 0
+push constant 10
+add
+push this 1
+call Screen.drawLine 4
+pop temp 0
+push this 0
+push constant 3
+sub
+push this 1
+push this 0
+push constant 10
+sub
+push this 1
+call Screen.drawLine 4
+pop temp 0
+push this 0
+push this 1
+push constant 3
+add
+push this 0
+push this 1
+push constant 10
+add
+call Screen.drawLine 4
+pop temp 0
+push this 0
+push this 1
+push constant 3
+sub
+push this 0
+push this 1
+push constant 10
+sub
+call Screen.drawLine 4
+pop temp 0
+push constant 0
+return

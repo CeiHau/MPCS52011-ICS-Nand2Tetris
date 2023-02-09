@@ -1,0 +1,43 @@
+class Bullet{
+    field int x, y;
+    field boolean hit;
+
+    constructor Bullet new(int Ax, int Ay) {
+        let x = Ax;
+        let y = Ay;
+        let hit = false;
+        return this;
+    }
+    method void dispose() {
+        do Memory.deAlloc(this);
+        return;
+    }
+
+     method void show() {
+        do Screen.setColor(true);
+        do draw();
+        return;
+    }
+
+     method void hide() {
+        do Screen.setColor(false);
+	    do draw();
+        return;
+    }
+
+    method void draw() {
+	    do Screen.drawCircle(x, y, 3);
+	    return;
+    }
+
+    method int move() {
+        do hide();
+
+        let y  = y - 9;
+   
+        
+        do show();
+        return y;
+    }
+    
+}

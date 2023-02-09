@@ -1,0 +1,1 @@
+press "SPACEBAR" to shoot, if you shoot the target the screnn will show the information of score.
